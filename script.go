@@ -95,20 +95,21 @@ func correct(word string, model map[string]int) string {
 }
 
 func main() {
-	if input, err := ioutil.ReadFile("misspelling.txt"); err == nil {
+	suffix := "en"
+	if input, err := ioutil.ReadFile(fmt.Sprintf("misspelling_%s.txt", suffix)); err == nil {
 		var totalTime float64
-		pattern := regexp.MustCompile("(?P<Misspell>[a-z]+)->(?P<Correct>[a-z,]+)")
-		model := train("big.txt")
+		pattern := regexp.MustCompile("(?P<Misspell>[àáéíóúâôêçñãõa-z]+)->(?P<Correct>[àáéíóúâôêçñãõa-z,]+)")
+		model := train(fmt.Sprintf("dictionary_%s.txt", suffix))
 		totalFixed := 0
 		totalLines := 0
-		for _, lines := range pattern.FindAllStringSubmatch(string(input), -1) {
-			word := strings.ToLower(lines[1])
+		for _, lines := range pattern.FindAllStringSubmatch(strings.ToLower(string(input)), -1) {
+			word := lines[1]
 			corrections := strings.Split(lines[2], ",")
 			startTime := time.Now()
 			fixed := correct(word, model)
 			totalTime += time.Now().Sub(startTime).Seconds()
 			for _, correction := range corrections {
-				if fixed == strings.ToLower(correction) {
+				if fixed == correction {
 					totalFixed++
 					break
 				} else {
@@ -118,7 +119,7 @@ func main() {
 			totalLines++
 		}
 		fmt.Printf("\nTime : %v seconds\n", totalTime)
-		fmt.Printf("Precision : %v out of %v (%v percent)\n", totalFixed, totalLines, float32(totalFixed)/float32(totalLines)*100.0)
+		fmt.Printf("Precision : %v out of %v (%v%%)\n", totalFixed, totalLines, float32(totalFixed)/float32(totalLines)*100.0)
 		fmt.Println("Finished")
 	} else {
 		panic("Failed loading data from misspellings file")

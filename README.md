@@ -14,6 +14,6 @@ I got a total of **1303 errors** and **2816 successful** cases (68.36611% succes
 
 ## Future Work
 
-In order to make the script run faster, it would be interesting to use something like Trie, instead of iterating through a plain text file.
+~~In order to make the script run faster, it would be interesting to use something like BK-Trees or Trie, instead of iterating through a plain text file.~~
 
-In order to improve the successful cases ratio, we could fill our dictionary file `big.txt` with new words. We could take context into consideration, as well. Problems like `Expect yearm->year but got years` can only be solved with context.
+In order to improve the successful cases ratio, we could fill our dictionary files with new words. We could take context into consideration, as well. Problems like `Expect yearm->year but got years` can only be solved with context.
