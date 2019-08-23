@@ -95,7 +95,7 @@ func correct(word string, model map[string]int) string {
 }
 
 func main() {
-	suffix := "en"
+	suffix := "es"
 	if input, err := ioutil.ReadFile(fmt.Sprintf("misspelling_%s.txt", suffix)); err == nil {
 		var totalTime float64
 		pattern := regexp.MustCompile("(?P<Misspell>[àáéíóúâôêçñãõa-z]+)->(?P<Correct>[àáéíóúâôêçñãõa-z,]+)")
