@@ -1,1 +1,6 @@
 sexsual->sexual
+start->start
+star->star
+wars->wars
+juguetes->juguetes
+sexuale->sexual,sexuales
